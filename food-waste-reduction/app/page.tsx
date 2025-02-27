@@ -114,7 +114,7 @@ export default function Home() {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-200 to-emerald-200 rounded-full blur-3xl opacity-20" />
                 <img
-                  src="/top_2.jpg?height=300&width=450"
+                  src="/3.png?height=300&width=450"
                   alt="食品ロス削減イメージ"
                   className="rounded-lg shadow-2xl relative z-10 w-full max-w-md mx-auto"
                 />
