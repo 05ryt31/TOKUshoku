@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import {  useEffect,useState, useRef } from "react"
 import Link from "next/link"
 import { Leaf, Camera, TrendingDown, Users, Store, MapPin, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -22,7 +22,7 @@ export default function Home() {
     )
   }
 
-  const products = [
+  const product = [
     {
       id: 1,
       name: "有機野菜セット",
@@ -40,7 +40,7 @@ export default function Home() {
     {
       id: 3,
       name: "手作りパン詰め合わせ",
-      image: "top_1.jpg?height=200&width=300",
+      image: "bread.jpeg?height=200&width=300",
       originalPrice: 1000,
       discountedPrice: 800,
     },
@@ -52,6 +52,33 @@ export default function Home() {
       discountedPrice: 2000,
     },
   ]
+
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("/api/products", { method: "GET" });
+        if (!res.ok) {
+          throw new Error("データの取得に失敗しました");
+        }
+        const data = await res.json();
+        setProducts(data);
+      } catch (error: any) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -143,16 +170,25 @@ export default function Home() {
               本日のお得な商品
             </h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {products.map((product) => (
+              {product.map((product) => (
                 <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  name={product.name}
-                  image={product.image}
-                  originalPrice={product.originalPrice}
-                  discountedPrice={product.discountedPrice}
-                  isFavorite={favoriteProducts.includes(product.id)}
-                  onFavoriteToggle={handleFavoriteToggle}
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                image={product.image}
+                originalPrice={product.originalPrice}
+                discountedPrice={product.discountedPrice}
+                isFavorite={favoriteProducts.includes(product.id)}
+                onFavoriteToggle={handleFavoriteToggle}
+
+                // key={product.id}
+                // id={product.id}
+                // name={product.name}
+                // image={product.image || "/default-image.jpg"} // デフォルト画像を設定
+                // originalPrice={product.price} // `originalPrice` を `product.price` に修正
+                // discountedPrice={product.discounted_price} // `discountedPrice` を `product.discounted_price` に修正
+                // isFavorite={favoriteProducts.includes(product.id)}
+                // onFavoriteToggle={handleFavoriteToggle}
                 />
               ))}
             </div>
