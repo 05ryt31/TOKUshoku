@@ -21,13 +21,13 @@ export default function PurchasePage({ params }: { params: { id: string } }) {
           <CardContent className="space-y-6">
             <div className="flex items-center gap-4">
               <img
-                src="/placeholder.svg?height=100&width=100"
+                src="/vegetables.jpg?height=100&width=100"
                 alt={`商品 ${params.id} の画像`}
                 className="w-24 h-24 object-cover rounded-lg"
               />
               <div>
-                <h2 className="font-bold">商品名 {params.id}</h2>
-                <p className="text-lg font-bold text-red-600">¥300</p>
+                <h2 className="font-bold">商品名 有機野菜セット</h2>
+                <p className="text-lg font-bold text-red-600">¥1200</p>
               </div>
             </div>
             <div>
