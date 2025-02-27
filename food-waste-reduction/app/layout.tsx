@@ -6,7 +6,7 @@ import NavigationWrapper from "@/app/components/NavigationWrapper" // 先ほど�
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "エコフード - 食品ロス削減でお得に買い物",
+  title: "TOKUshoku - 食品ロス削減でお得に買い物",
   description:
     "食品ロス削減に貢献しながら、賢くお買い物ができるプラットフォーム",
   generator: "v0.dev",

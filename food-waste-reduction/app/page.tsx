@@ -107,7 +107,7 @@ export default function Home() {
               },
               {
                 icon: <MapPin className="h-8 w-8 text-blue-500" />,
-                title: "近い + お得な商品を発見",
+                title: "近くのお得を発見！！",
                 description: "マップ機能で様々なお店を見つけることが可能",
               },
               {
