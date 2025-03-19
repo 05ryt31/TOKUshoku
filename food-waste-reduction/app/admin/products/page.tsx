@@ -11,6 +11,8 @@ import Navigation from "@/app/components/navigation"
 interface Product {
   id: number;
   name: string;
+  description: string;
+  imageUrl: string;
   price: number;
   discounted_price: number;
   start_time: string;
@@ -69,6 +71,7 @@ export default function AdminProductsPage() {
             <TableRow>
               <TableHead>ID</TableHead>
               <TableHead>商品名</TableHead>
+              <TableHead>商品説明</TableHead>
               <TableHead>価格</TableHead>
               <TableHead>割引価格</TableHead>
               <TableHead>受取可能時間</TableHead>
@@ -80,8 +83,9 @@ export default function AdminProductsPage() {
               <TableRow key={product.id}>
                 <TableCell>{product.id}</TableCell>
                 <TableCell>{product.name}</TableCell>
+                <TableCell>{product.description}</TableCell>
                 <TableCell>¥{product.price.toLocaleString()}</TableCell>
-                <TableCell>{product.discounted_price}</TableCell>
+                <TableCell>¥{product.discounted_price}</TableCell>
                 <TableCell>
                   {new Date(product.start_time).toLocaleString("ja-JP", {
                     year: "numeric",

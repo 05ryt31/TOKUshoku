@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import ProductCard from "@/components/product-card"
+import { Product } from "@prisma/client"
 
 export default function Home() {
   const featuresRef = useRef<HTMLElement>(null)
