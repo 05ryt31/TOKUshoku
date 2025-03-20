@@ -19,10 +19,12 @@ model Item {
 }
 
 model Product {
-  id               Int      @id @default(autoincrement())
   name             String
   price            Int
-  discounted_price Int      @default(0) // or any appropriate default value
+  id               Int      @id @default(autoincrement())
+  discounted_price Int      @default(0)
+  end_time         DateTime @default(now())
   start_time       DateTime @default(now())
-  end_time         DateTime @default(now()) // or another default value
+  imageUrl         String   @default("")
+  description      String   @default("")
 }

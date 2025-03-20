@@ -67,7 +67,7 @@ export default function ProductCard({
             className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
             asChild
           >
-            <Link href={`/products/${id}/purchase`}>購入する</Link>
+            <Link href={`/products/${id}/purchase`}>予約する</Link>
           </Button>
         </div>
       </CardContent>

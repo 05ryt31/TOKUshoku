@@ -18,7 +18,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { name, price, discounted_price, start_time, end_time } = body
+    const { name, description, imageUrl, price, discounted_price, start_time, end_time } = body
     
     // Convert price and discounted_price to numbers
     const priceNumber = Number(price);
@@ -30,13 +30,15 @@ export async function POST(req: Request) {
     
     // バリデーション
     if (!name || typeof priceNumber !== "number" || typeof discountedPriceNumber !== "number") {
-      console.error("Invalid data:", { name, priceNumber, discountedPriceNumber, startTime, endTime });
+      console.error("Invalid data:", { name, description, imageUrl, priceNumber, discountedPriceNumber, startTime, endTime });
       return NextResponse.json({ message: "無効なデータです" }, { status: 400 });
     }
 
     const newProduct = await prisma.product.create({
       data: {
         name,
+        description,
+        imageUrl,
         price: priceNumber,
         discounted_price: discountedPriceNumber,
         start_time: startTime,

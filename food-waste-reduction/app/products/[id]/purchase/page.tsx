@@ -16,7 +16,7 @@ export default function PurchasePage({ params }: { params: { id: string } }) {
         </Link>
         <Card>
           <CardHeader>
-            <CardTitle>購入確認</CardTitle>
+            <CardTitle>予約確認</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="flex items-center gap-4">
@@ -44,10 +44,10 @@ export default function PurchasePage({ params }: { params: { id: string } }) {
               size="lg"
               asChild
             >
-              <Link href={`/products/${params.id}/map`}>購入を確定する</Link>
+              <Link href={`/products/${params.id}/map`}>予約を確定する</Link>
             </Button>
             <p className="text-sm text-center text-muted-foreground">
-              購入を確定すると、店舗への案内マップが表示されます。
+              予約を確定すると、店舗への案内マップが表示されます。
             </p>
           </CardContent>
         </Card>
