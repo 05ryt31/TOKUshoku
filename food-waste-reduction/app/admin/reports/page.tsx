@@ -1,21 +1,61 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react";
 import { Calendar } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Navigation from "@/app/components/navigation"
+import SalesChart from "@/app/components/SalesChart" // SalesChartをインポート
 
 export default function AdminReportsPage() {
   const [period, setPeriod] = useState("今週")
 
-  // This data would typically come from an API call
+
   const reportData = {
     totalSales: 1250000,
     totalOrders: 500,
     averageOrderValue: 2500,
     foodWasteReduction: 750,
   }
+
+
+  const [salesData, setSalesData] = useState<
+  { date: string; totalSales: number; totalOrders: number }[]
+>([]);
+
+useEffect(() => {
+  if (period === "今日") {
+    setSalesData([
+      { date: "9:00", totalSales: 20000, totalOrders: 5 },
+      { date: "12:00", totalSales: 50000, totalOrders: 10 },
+      { date: "15:00", totalSales: 80000, totalOrders: 12 },
+      { date: "18:00", totalSales: 100000, totalOrders: 15 },
+    ])
+  } else if (period === "今週") {
+    setSalesData([
+      { date: "4/1", totalSales: 200000, totalOrders: 50 },
+      { date: "4/2", totalSales: 300000, totalOrders: 70 },
+      { date: "4/3", totalSales: 250000, totalOrders: 60 },
+      { date: "4/4", totalSales: 350000, totalOrders: 80 },
+    ])
+  } else if (period === "今月") {
+    setSalesData([
+      { date: "4/1", totalSales: 100000, totalOrders: 30 },
+      { date: "4/5", totalSales: 150000, totalOrders: 40 },
+      { date: "4/10", totalSales: 200000, totalOrders: 60 },
+      { date: "4/15", totalSales: 180000, totalOrders: 55 },
+      { date: "4/20", totalSales: 220000, totalOrders: 70 },
+      { date: "4/25", totalSales: 250000, totalOrders: 80 },
+    ])
+  } else if (period === "今年") {
+    setSalesData([
+      { date: "1月", totalSales: 500000, totalOrders: 120 },
+      { date: "2月", totalSales: 600000, totalOrders: 130 },
+      { date: "3月", totalSales: 750000, totalOrders: 150 },
+      { date: "4月", totalSales: 800000, totalOrders: 170 },
+    ])
+  }
+}, [period])
 
   return (
     <>
@@ -39,6 +79,7 @@ export default function AdminReportsPage() {
               </Select>
             </div>
           </div>
+
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -73,10 +114,12 @@ export default function AdminReportsPage() {
               </CardContent>
             </Card>
           </div>
+
+          {/* グラフ表示エリア */}
           <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">グラフ表示</h2>
+            <h2 className="text-xl font-semibold mb-4">売上グラフ</h2>
             <div className="bg-muted aspect-video rounded-lg flex items-center justify-center">
-              <p className="text-muted-foreground">ここに売上推移などのグラフが表示されます</p>
+             <SalesChart salesData={salesData} />
             </div>
           </div>
         </div>
@@ -84,4 +127,3 @@ export default function AdminReportsPage() {
     </>
   )
 }
-

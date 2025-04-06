@@ -33,7 +33,7 @@ export default function AdminPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Store className="h-5 w-5" />
-                    店舗情報
+                    店舗プロフィール編集
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
