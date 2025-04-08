@@ -62,21 +62,21 @@ export default function NewProductPage() {
     setIsLoading(true)
     try {
       const formData = new FormData(event.currentTarget)
-
+  
       if (selectedDate && startTime && endTime) {
         const dateString = selectedDate.toISOString().split("T")[0]; // YYYY-MM-DD
         const startDateTime = new Date(`${dateString}T${startTime}:00Z`);
         const endDateTime = new Date(`${dateString}T${endTime}:00Z`);
     
-        // Check if the start time is before the end time
+        // 開始時間が終了時間より遅く設定されていないか確認
         if (startDateTime >= endDateTime) {
           alert("終了時間は開始時間より遅く設定してください。");
           setIsLoading(false);
           return;
         }
-
-        formData.set("start_time", new Date(`${dateString}T${startTime}:00Z`).toISOString())
-        formData.set("end_time", new Date(`${dateString}T${endTime}:00Z`).toISOString())
+  
+        formData.set("start_time", startDateTime.toISOString())
+        formData.set("end_time", endDateTime.toISOString())
       }
       
       // 画像ファイルをFormDataに追加
@@ -107,6 +107,7 @@ export default function NewProductPage() {
       setIsLoading(false)
     }
   }
+  
 
   return (
     <>
