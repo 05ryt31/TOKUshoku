@@ -1,3 +1,4 @@
+// app/components/navigation.tsx
 "use client"
 
 import { useState, useEffect } from "react"
@@ -69,20 +70,29 @@ export default function Navigation({ isAdmin = false }: NavigationProps) {
           </Link>
           {isLoggedIn ? (
             <Link
-              href="/mypage"
+              href="/user/mypage"
               className="text-sm font-medium hover:text-primary flex items-center gap-2 px-3 py-2 rounded-md transition-colors duration-200 ease-in-out hover:bg-green-100"
             >
               <User className="h-4 w-4" />
               マイページ
             </Link>
           ) : (
-            <Link
-              href="/auth/login"
-              className="text-sm font-medium hover:text-primary flex items-center gap-2 px-3 py-2 rounded-md transition-colors duration-200 ease-in-out hover:bg-green-100"
-            >
-              <Users className="h-4 w-4" />
-              ログイン
-            </Link>
+            <>
+              <Link
+                href="/auth/user/login"
+                className="text-sm font-medium hover:text-primary flex items-center gap-2 px-3 py-2 rounded-md transition-colors duration-200 ease-in-out hover:bg-green-100"
+              >
+                <Users className="h-4 w-4" />
+                userログイン
+              </Link>
+              <Link 
+                href="/auth/store/login"
+                className="text-sm font-medium hover:text-primary flex items-center gap-2 px-3 py-2 rounded-md transition-colors duration-200 ease-in-out hover:bg-green-100"
+              >
+                <Store className="h-4 w-4" />
+                店舗ログイン
+              </Link>
+            </>
           )}
         </nav>
       </div>
