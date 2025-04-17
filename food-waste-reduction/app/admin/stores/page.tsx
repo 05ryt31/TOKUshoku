@@ -1,4 +1,6 @@
-'use client'
+
+// app/admin/stores/page.tsx
+"use client"
 
 
 import { useState } from "react"
