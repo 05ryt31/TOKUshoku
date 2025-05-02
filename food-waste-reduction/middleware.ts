@@ -1,7 +1,8 @@
-// /app/middleware/middleware.ts
+// middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import supabase from '@/lib/supabase';
+import { createServerSupabase } from '@/lib/supabase';
+import { el } from 'date-fns/locale';
 
 // 公開ページ（認証不要）のパス一覧
 const PUBLIC_PATHS = [
@@ -9,12 +10,17 @@ const PUBLIC_PATHS = [
   '/auth/user/login',
   '/auth/user/signup',
   '/auth/store/signup',
-  '/auth/user/forgotpassword',      // パスワードリセット用画面
-  '/auth/user/forgotpassword/reset', // パスワードリセット用画面
+  '/auth/user/forgotpassword',      
+  '/auth/user/forgotpassword/reset', 
   '/auth/user/logout',
   '/auth/store/login',
-  'auth/store/logout',
+  '/auth/store/logout',
 ];
+
+// 店舗用パス
+const STORE_PATHS = ['/admin', '/admin/store'];
+// ユーザー用パス
+const USER_PATHS = ['/user'];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -29,26 +35,42 @@ export async function middleware(request: NextRequest) {
   }
 
   // 公開ページの場合は認証チェックをスキップ
-  if (PUBLIC_PATHS.some((publicPath) => pathname.startsWith(publicPath))) {
+  if (PUBLIC_PATHS.some(publicPath => pathname.startsWith(publicPath))) {
     return NextResponse.next();
   }
 
-  // Cookieから認証トークンを取得（※サーバーサイドで管理する場合）
-  const token = request.cookies.get('token')?.value;
-  if (!token) {
-    console.error('Token not found in cookies');
-    // トークンがなければログインページへリダイレクト
-    const loginUrl = new URL('/auth/user/login', request.url);
-    return NextResponse.redirect(loginUrl);
+  // Cookieから認証トークンを取得
+  const isStorePath = STORE_PATHS.some(path => pathname.startsWith(path));
+  const isUserPath = USER_PATHS.some(path => pathname.startsWith(path));
+  let token;
+  if (isStorePath) {
+    token = request.cookies.get('store_token')?.value;
+    if (!token) {
+      return NextResponse.redirect(new URL('/auth/store/login', request.url));
+    }
+  } else if (isUserPath) {
+    token = request.cookies.get('user_token')?.value;
+    if (!token) {
+      return NextResponse.redirect(new URL('/auth/user/login', request.url));
+    }
   }
 
+
+
+  
+
   // Supabaseでトークンを検証
+  const supabase = createServerSupabase();
   const { data, error } = await supabase.auth.getUser(token);
   if (error || !data.user) {
     console.error('Invalid token:', error);
-    // 無効なトークンの場合はCookieを削除し、ログインページへリダイレクト
-    const response = NextResponse.redirect(new URL('/auth/user/login', request.url));
-    response.cookies.delete('token');
+    
+    // 無効なトークンの場合はCookieを削除し、適切なログインページへリダイレクト
+    const response = STORE_PATHS.some(path => pathname.startsWith(path))
+      ? NextResponse.redirect(new URL('/auth/store/login', request.url))
+      : NextResponse.redirect(new URL('/auth/user/login', request.url));
+      
+    response.cookies.delete(isStorePath ?'store_token' : 'user_token');
     return response;
   }
 

@@ -9,6 +9,7 @@ export async function GET(req: NextRequest) {
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    console.log("session", session);
 
     const userId = session.user.id;
 

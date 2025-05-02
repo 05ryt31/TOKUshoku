@@ -8,7 +8,7 @@
 
 
 import { NextResponse, NextRequest } from "next/server";
-import supabase from "@/lib/supabase";
+import { createServerSupabase } from "@/lib/supabase";
 import { access } from "fs";
 
 
@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Supabase Auth のsignInWithPassword()メソッドを利用してログイン
+    const supabase = createServerSupabase();
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error || !data.user) {
       // 認証失敗時
@@ -47,7 +48,7 @@ export async function POST(request: NextRequest) {
     //Cookieにトークンを保存（httpOnly推奨）
     // pathや同一オリジンの場合のsecure/sameSite 属性を適宜設定
     response.cookies.set({
-      name: 'token',
+      name: 'user_token',
       value: access_token,
       httpOnly: true,
       path: '/', 

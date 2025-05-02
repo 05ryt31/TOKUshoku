@@ -8,8 +8,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import supabase from '@/lib/supabase';
-
+import { createServerSupabase } from '@/lib/supabase';
 export async function POST(request:NextRequest) {
     try{
         //リクエストのJSONボディからemailを取得
@@ -19,6 +18,7 @@ export async function POST(request:NextRequest) {
             return NextResponse.json({message: 'メールアドレスが必要です'}, {status:400});
         }
         //Supabase AuthのresetPasswordForEmail()メソッドを利用してパスワードリセット
+        const supabase = createServerSupabase();
         const {error} = await supabase.auth.resetPasswordForEmail(email, {
             redirectTo: `http://localhost:3000/forgotpassword/reset`, //パスワードリセット後のリダイレクト先
             

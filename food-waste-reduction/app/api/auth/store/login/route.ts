@@ -6,7 +6,9 @@
  * リクエストボディ: { email: string, password: string }
  */
 import { NextRequest, NextResponse } from 'next/server';
-import supabase from '@/lib/supabase';
+import { createServerSupabase } from '@/lib/supabase';
+
+
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,6 +16,7 @@ export async function POST(request: NextRequest) {
     if (!email || !password) {
       return NextResponse.json({ message: 'Email and password are required' }, { status: 400 });
     }
+    const supabase = createServerSupabase();
 
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error || !data.user) {
@@ -33,12 +36,12 @@ export async function POST(request: NextRequest) {
       expires_in,
     });
     response.cookies.set({
-      name: 'token',
+      name: 'store_token',
       value: access_token,
       httpOnly: true,
       path: '/',
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: false,
+      sameSite: 'lax',
     });
 
     return response;

@@ -8,11 +8,12 @@
  * 必要に応じでCookieを削除したり、ログアウトメッセージを返す
  */
 import { NextRequest, NextResponse } from 'next/server';
-import  supabase  from '@/lib/supabase';
+import  { createServerSupabase } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
   try {
     // 現在のセッションでログアウト
+    const supabase = createServerSupabase();
     const { error } = await supabase.auth.signOut();
     // エラーがあればエラーメッセージを返す
     if (error) {

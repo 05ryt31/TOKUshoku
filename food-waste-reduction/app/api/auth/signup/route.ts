@@ -11,7 +11,7 @@
 
 
 import { NextRequest, NextResponse } from 'next/server';
-import  supabase  from '@/lib/supabase';
+import  { createServerSupabase } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
     try{
@@ -50,6 +50,7 @@ export async function POST(request: NextRequest) {
         }
         
         //Supabase AuthのsignUp()メソッドを利用してサインアップ
+        const supabase = createServerSupabase();
         const {data: authData,error: authError} = await supabase.auth.signUp({email, password});
         if (authError) {
             console.error('Supabase Auth signUp error:', authError);
