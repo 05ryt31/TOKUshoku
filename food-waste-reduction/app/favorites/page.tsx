@@ -61,7 +61,7 @@ export default function FavoritesPage() {
                 image={product.image}
                 originalPrice={product.originalPrice}
                 discountedPrice={product.discountedPrice}
-                isFavorite={true} // お気に入りページでは常にtrueに設定
+                initialFavorite={true} // お気に入りページでは常にtrueに設定
                 onFavoriteToggle={handleFavoriteToggle}
               />
             ))}
