@@ -58,6 +58,21 @@ export default function AdminPage() {
                   </Button>
                 </CardContent>
               </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <BarChart className="h-5 w-5" />
+                    取引一覧
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4">取引の一覧を表示します。</p>
+                  <Button className="w-full" asChild>
+                    <Link href="/admin/transactions">取引一覧を見る</Link>
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
         </div>
       </section>
