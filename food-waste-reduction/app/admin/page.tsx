@@ -1,3 +1,4 @@
+// app/admin/page.tsx
 import Navigation from "@/app/components/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"

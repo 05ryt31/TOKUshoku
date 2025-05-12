@@ -1,3 +1,4 @@
+// app/components/product-card.tsx
 "use client"
 
 import type React from "react"

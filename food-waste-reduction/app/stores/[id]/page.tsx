@@ -1,3 +1,4 @@
+// app/stores/[id]/page.tsx
 import Link from "next/link"
 import { ArrowLeft, Store, MapPin, Phone, Clock, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
