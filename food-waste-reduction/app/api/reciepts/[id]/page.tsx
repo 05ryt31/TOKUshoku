@@ -1,3 +1,4 @@
+// app/api/reciepts/[id]/page.tsx
 import Link from "next/link"
 import { ArrowLeft, ShoppingBag } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"

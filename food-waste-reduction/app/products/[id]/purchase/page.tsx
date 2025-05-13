@@ -1,3 +1,4 @@
+// app/products/[id]/purchase/page.tsx
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"

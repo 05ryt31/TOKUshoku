@@ -1,3 +1,4 @@
+// app/components/stamp-card.tsx
 import { Check } from "lucide-react"
 
 interface StampCardProps {

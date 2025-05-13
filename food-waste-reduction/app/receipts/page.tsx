@@ -1,3 +1,4 @@
+// app/receipts/page.tsx
 "use client"
 
 import React, { useState, useRef, useEffect } from "react"

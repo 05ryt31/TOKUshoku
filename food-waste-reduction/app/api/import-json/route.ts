@@ -1,3 +1,4 @@
+// app/api/import-json/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import fs from 'fs';

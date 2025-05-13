@@ -1,5 +1,5 @@
 // Dummy data for the store list
-
+// app/stores/storesData.ts
 type Store = {
     name: string;
     address: string;

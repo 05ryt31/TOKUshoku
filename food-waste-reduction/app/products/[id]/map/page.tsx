@@ -1,5 +1,5 @@
 // page.tsx
-
+// app/products/[id]/map/page.tsx
 "use client"; // クライアントコンポーネント
 
 import { useParams } from "next/navigation";
