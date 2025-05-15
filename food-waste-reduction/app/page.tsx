@@ -62,9 +62,9 @@ export default function Home() {
     const fetchProducts = async () => {
       try {
         const res = await fetch("/api/products", { method: "GET" });
-        if (!res.ok) {
-          throw new Error("データの取得に失敗しました");
-        }
+        // if (!res.ok) {
+        //   throw new Error("データの取得に失敗しました");
+        // }
         const data = await res.json();
         setProducts(data);
       } catch (error: any) {
@@ -171,7 +171,7 @@ export default function Home() {
               本日のお得な商品
             </h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {product.map((product) => (
+            {product.map((product) => (
                 <ProductCard
                 key={product.id}
                 id={product.id}
@@ -179,7 +179,7 @@ export default function Home() {
                 image={product.image}
                 originalPrice={product.originalPrice}
                 discountedPrice={product.discountedPrice}
-                isFavorite={favoriteProducts.includes(product.id)}
+                initialFavorite={favoriteProducts.includes(product.id)}
                 onFavoriteToggle={handleFavoriteToggle}
 
                 // key={product.id}
