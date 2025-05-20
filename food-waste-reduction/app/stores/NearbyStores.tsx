@@ -1,5 +1,5 @@
 // NearbyStores.tsx
-
+// app/stores/NearbyStores.tsx
 "use client";
 
 import { useEffect, useState } from "react";

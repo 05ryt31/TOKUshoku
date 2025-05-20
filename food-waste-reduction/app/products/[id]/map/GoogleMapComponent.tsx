@@ -1,5 +1,5 @@
 // GoogleMapComponent.tsx
-
+// app/products/[id]/map/GoogleMapComponent.tsx
 "use client"; // クライアントコンポーネント
 
 import { useEffect, useState } from "react";
